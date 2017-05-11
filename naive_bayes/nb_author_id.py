@@ -11,10 +11,13 @@
 """
     
 import sys
-from time import time
-sys.path.append("../tools/")
-from email_preprocess import preprocess
 
+from time import time
+sys.path.append("/media/ravi/Backup/workspace1/ud120-projects/tools")
+
+from tools.email_preprocess import preprocess
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score
 
 ### features_train and features_test are the features for the training
 ### and testing datasets, respectively
@@ -26,6 +29,16 @@ features_train, features_test, labels_train, labels_test = preprocess()
 
 #########################################################
 ### your code goes here ###
+classifier = GaussianNB()
+t0 = time()
+classifier.fit(features_train, labels_train)
+print "training time: ", round(time()-t0, 3), "s"
+
+tp = time()
+pred = classifier.predict(features_test)
+print "predicting time: ", round(time()-tp, 3), "s"
+
+print(accuracy_score(pred, labels_test))
 
 
 #########################################################
