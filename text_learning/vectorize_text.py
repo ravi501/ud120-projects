@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import os
 import pickle
 import re
@@ -54,7 +52,7 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
 
         ### use str.replace() to remove any instances of the words
         ### ["sara", "shackleton", "chris", "germani"]
-        replace_Words = ["sara", "shackleton", "chris", "germani"]
+        replace_Words = ["sara", "shackleton", "chris", "germani", "sshacklensf", "cgermannsf"]
 
         for word in replace_Words:
             email_text = email_text.replace(word, "")
@@ -62,9 +60,9 @@ for name, from_person in [("sara", from_sara), ("chris", from_chris)]:
         ### append the text to word_data
         word_data.append(email_text)
         ### append a 0 to from_data if email is from Sara, and 1 if email is from Chris
-        if 'Sara' in name:
+        if 'sara' in name:
             from_data.append(0)
-        else:
+        elif 'chris' in name:
             from_data.append(1)
 
         email.close()

@@ -38,6 +38,35 @@ labels_train   = labels_train[:150]
 
 
 ### your code goes here
+from sklearn import tree
+from sklearn.metrics import accuracy_score
+clf = tree.DecisionTreeClassifier()
+clf.fit(features_train, labels_train)
+
+
+pred = clf.predict(features_test, labels_test)
+
+importances = clf.feature_importances_
+
+for i in range(0, len(importances)): # this starts the iteration through importances
+    if importances[i] > .2: # if the importance, i, is > 0.2 print it
+        print i, importances[i]
+
+score = accuracy_score(labels_test, pred)
+print score
+
+
+features_train, features_test, labels_train, labels_test = cross_validation.train_test_split(word_data, authors, test_size=0.1, random_state=42)
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5,
+                             stop_words='english')
+features_train = vectorizer.fit_transform(features_train)
+features_test  = vectorizer.transform(features_test).toarray()
+
+#For the second part of the project, you can list the words in the TfIdf
+#by calling get_feature_names(), something like:
+list_words=vectorizer.get_feature_names()
+print 'Most Important Word',list_words[21323]
 
 
 
